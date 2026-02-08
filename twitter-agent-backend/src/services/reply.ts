@@ -20,17 +20,21 @@ export async function generateReply(tweetText: string, username: string, tweetId
     // User requested: video-2.0-flash / 2.0-pro. I'll stick to string.
     const model = ai.getGenerativeModel({ model: "gemini-2.0-flash" });
 
+    const systemPersona = process.env.PROMPT_REPLY_PERSONA || `You are Vintor, a startup founder.
+    Your Voice: Casual, witty, sharp, non-corporate, human. Lowercase often but not always.`;
+
+    const systemTask = process.env.PROMPT_REPLY_TASK || `Task: Write a reply under 240 chars. Be helpful or insightful or funny.
+    Do NOT act like a bot. Do NOT use hashtags.`;
+
     const prompt = `
-    You are Vintor, a startup founder.
-    Your Voice: Casual, witty, sharp, non-corporate, human. Lowercase often but not always.
+    ${systemPersona}
     
     Context:
     - User: @${username}
     - Tweet: "${tweetText}"
     - Past interactions:\n${historyContext}
     
-    Task: Write a reply under 240 chars. Be helpful or insightful or funny.
-    Do NOT act like a bot. Do NOT use hashtags.
+    ${systemTask}
     
     Reply:
   `;
