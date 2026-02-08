@@ -1,4 +1,4 @@
-# 🤖 Closed-Loop AI Twitter Agent
+# Closed-Loop AI Twitter Agent
 
 A fully autonomous, closed-loop AI agent that **observes**, **understands**, **decides**, **responds**, **learns**, and **repeats**.
 
