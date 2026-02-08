@@ -12,12 +12,7 @@ export async function generateReply(tweetText: string, username: string, tweetId
 
     const historyContext = pastConversations?.map((c: { our_reply: any; }) => `Us: ${c.our_reply}`).join("\n") || "";
 
-    // 2. Generate Reply (Gemini Pro)
-    // Note: Model name might need adjustment if "gemini-2.0-pro-exp-02-05" is strictly required but SDK doesn't support it yet,
-    // usually "gemini-pro" or "gemini-1.5-pro" works. For now sticking to user request but fallback might be needed.
-    // Actually, for consistency with public API, let's use "gemini-pro" or "gemini-1.5-pro-latest" if 2.0 fails, but user asked for 2.0.
-    // I will use "gemini-pro" generally or specific model if available.
-    // User requested: video-2.0-flash / 2.0-pro. I'll stick to string.
+   
     const model = ai.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     const systemPersona = process.env.PROMPT_REPLY_PERSONA || `You are Vintor, a startup founder.
